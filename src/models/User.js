@@ -10,9 +10,9 @@ const {
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use("Hash");
-const Token = use("App/Models/Token");
+const { Token } = require("../models/Token");
 const Role = use("Role");
-class User extends RamenModel {
+class RamenAuthUserModel extends RamenModel {
   static boot() {
     super.boot();
     this.addTrait("@provider:Lucid/Slugify", {
@@ -118,4 +118,4 @@ class User extends RamenModel {
   }
 }
 
-module.exports = User;
+module.exports = RamenAuthUserModel;

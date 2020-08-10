@@ -15,13 +15,17 @@ const {
 // const RamenFilter = require('@ordentco/ramenbox/src/RamenFilter')
 const shortid = require("shortid");
 const { requestBody } = require("@ordentco/ramenbox/src/Utilities");
+const { MailService } = require("./Mail");
 
-class Auth extends RamenServices {
-  constructor(userModel, roleModel, tokenModel, MailService) {
+const { Role } = require("../models/Role");
+const { Token } = require("../models/Token");
+
+class RamenAuthService extends RamenServices {
+  constructor(userModel) {
     super(userModel);
-    this.Role = roleModel;
-    this.Token = tokenModel;
-    this.mail = MailService ? new MailService() : null;
+    this.Role = Role;
+    this.Token = Token;
+    this.mail = new MailService();
 
     this.repositories = {
       roles: this.Role,
@@ -253,4 +257,4 @@ class Auth extends RamenServices {
   }
 }
 
-module.exports = Auth;
+module.exports = RamenAuthService;
