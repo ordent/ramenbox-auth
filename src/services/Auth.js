@@ -3,7 +3,6 @@
 
 const {
   RamenServices,
-  RamenServices,
 } = require("@ordentco/ramenbox/src/Services/RamenServices");
 const {
   NotFoundException,
