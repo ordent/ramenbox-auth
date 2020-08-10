@@ -161,4 +161,4 @@ class MailService {
   }
 }
 
-module.exports = MailService;
+exports.MailService = MailService;

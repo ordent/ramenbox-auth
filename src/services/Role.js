@@ -1,16 +1,16 @@
-'use strict'
+"use strict";
 
-const moment = require('moment')
+const moment = require("moment");
 
 const {
-  RamenServices
-} = require('@ordentco/ramenbox/src/Services/RamenServices')
+  RamenServices,
+} = require("@ordentco/ramenbox/src/Services/RamenServices");
 
-class Role extends RamenServices {
+class RoleService extends RamenServices {
   constructor(base) {
-    super(base)
-    this.repositories = {}
+    super(base);
+    this.repositories = {};
   }
 }
 
-module.exports = Role
+exports.RoleService = RoleService;

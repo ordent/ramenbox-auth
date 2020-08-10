@@ -34,4 +34,4 @@ class Token extends RamenModel {
   // }
 }
 
-module.exports = Token;
+exports.Token = Token;

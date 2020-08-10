@@ -257,4 +257,4 @@ class RamenAuthService extends RamenServices {
   }
 }
 
-module.exports = RamenAuthService;
+exports.RamenAuthService = RamenAuthService;

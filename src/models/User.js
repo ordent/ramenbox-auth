@@ -118,4 +118,4 @@ class RamenAuthUserModel extends RamenModel {
   }
 }
 
-module.exports = RamenAuthUserModel;
+exports.RamenAuthUserModel = RamenAuthUserModel;

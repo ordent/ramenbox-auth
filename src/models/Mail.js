@@ -9,4 +9,4 @@ class Mail extends RamenModel {
   }
 }
 
-module.exports = Mail;
+exports.Mail = Mail;
