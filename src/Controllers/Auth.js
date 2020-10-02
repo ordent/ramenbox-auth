@@ -3,7 +3,7 @@
 const { RamenController } = require('@ordentco/ramenbox/src/Controller/RamenController')
 
 const User = use('App/Models/User')
-const AuthService = use('User/Service')
+const AuthService = use('App/Services/Auth')
 class RamenboxAuthController extends RamenController {
   constructor() {
     super(new AuthService(User))
