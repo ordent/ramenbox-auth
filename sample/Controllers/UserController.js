@@ -1,11 +1,12 @@
 "use strict";
 
 const {
-  RamenController,
-} = require("@ordentco/ramenbox/src/Controller/RamenController");
+  RamenBoxAuthController,
+} = require("../../src/Controllers/Auth");
 
 const AuthService = use("App/Services/Auth");
-class UserController extends RamenController {
+
+class UserController extends RamenBoxAuthController {
   constructor() {
     super(new AuthService());
   }

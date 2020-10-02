@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/ordent/ramenbox-auth.git"
   },
-  "version": "0.1.3",
+  "version": "0.2.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   "author": "arya.ddg00@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "@adonisjs/fold": "^4.0.9",
     "@ordentco/ramenbox": "^2.1.31"
   },
   "bugs": {
