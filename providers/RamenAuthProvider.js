@@ -35,6 +35,12 @@ class User extends ServiceProvider {
             return Role
         })
 
+        this.app.bind('Adonis/Acl/Role', () => {
+            const Role = require("../src/Models/Role");
+            Role._bootIfNotBooted()
+            return Role
+        })
+
         this.app.bind('Auth/Controller', () => {
             const controller = require('../src/Controllers/Auth')
             return controller
@@ -46,7 +52,7 @@ class User extends ServiceProvider {
         })
     }
 
-    boot() {}
+    boot() { }
 }
 
 module.exports = User
