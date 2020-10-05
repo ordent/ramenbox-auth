@@ -26,7 +26,7 @@ class Profile extends RamenModel {
             'phone',
             'images',
             'address',
-            // 'additionals'
+            'additionals'
         ]
     }
 

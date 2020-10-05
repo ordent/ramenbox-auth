@@ -119,7 +119,7 @@ class RamenboxAuthController extends RamenController {
     return props.sort().filter(function(e, i, arr) { 
        if (e!=arr[i+1] && typeof toCheck[e] == 'function') return true;
     });
-}
+  }
 }
 
 module.exports = RamenboxAuthController
