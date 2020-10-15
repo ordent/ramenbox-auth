@@ -109,7 +109,7 @@ class RamenboxAuthServices extends RamenServices {
           email_confirmation_sent: false,
         })
     }
-    this.verifyOnRegister(data)
+    await this.verifyOnRegister(data)
     return this.getResponse().setStatus(200).rawItem({
       email: request.params.email,
       email_confirmation_sent: true,
@@ -173,9 +173,7 @@ class RamenboxAuthServices extends RamenServices {
   async getDataFromToken(request) {
     const { token } = request.params
     // console.log(request.params)
-    this.setCustomRepositorySingleton('token', new RamenRepository(Token))
-    const data = await this.getCustomRepository('token')
-      .getModel()
+    const data = await Token
       .query()
       .where('token', token)
       .where('is_revoked', false)
@@ -188,7 +186,7 @@ class RamenboxAuthServices extends RamenServices {
 
   async getConfirmationFromToken({ request }) {
     const data = await this.getDataFromToken(request)
-    const user = await data.users().fetch()
+    const user = await data.user().fetch()
     if (user === null) {
       throw new NotFoundException('users not found')
     }
@@ -238,7 +236,7 @@ class RamenboxAuthServices extends RamenServices {
     const value = await this.getValidator().sanitize(requestBody(request))
     await this.getValidator().validate(value, 'validation')
     let data = await this.getDataFromToken(request)
-    let user = await data.users().fetch()
+    let user = await data.user().fetch()
     if (user === null) {
       throw new NotFoundException('users not found or already confirmed')
     }
@@ -278,22 +276,20 @@ class RamenboxAuthServices extends RamenServices {
   async postProfile({ request }) {
     const { id } = request.params
     let value = await this.getValidator().sanitize(requestBody(request))
-    // console.log(value)
+
     await this.getValidator().validate(value, 'put')
-    // this.setCustomRepositorySingleton('profile', new RamenRepository(Profile))
-    // this.setCustomFilterSingleton('profile', new (RamenValidatorGenerator(Profile))())
-    // await this.getCustomFilter('profile').validate(request, 'put')
+
     const user = await this.getRepository().getItem(id)
     let profile = await user.profiles().first()
 
     try {
       value = await this.fillProperties(value)
-      profile = await this.getCustomRepository('profile').putItem(
-        profile.id,
-        value,
-        true
-      )
+
+      profile.merge(value)
+      await profile.save()
+
     } catch (e) {
+      console.error(e)
       Sentry.captureException(e)
     }
     // console.log(profile)
@@ -348,7 +344,7 @@ class RamenboxAuthServices extends RamenServices {
     await this.getValidator().validate(value, 'remember')
     delete value.password_confirmation
     let data = await this.getDataFromToken(request)
-    let user = await data.users().fetch()
+    let user = await data.user().fetch()
     if (user === null) {
       throw new NotFoundException('users not found or already changed')
     }
